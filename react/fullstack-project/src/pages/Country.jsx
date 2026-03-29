@@ -1,14 +1,17 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
+import { getWeather } from "../API/weather";
 
-export default function Country () {
+export default function Country() {
 
     const navigate = useNavigate();
 
-    const { id } = useParams(); 
+    const { id } = useParams();
 
 
     const [country, setCountry] = useState({});
+    const [weather, setWeather] = useState(null);
+    const [weatherError, setWeatherError] = useState("");
 
     const [success, setSuccess] = useState("");
 
@@ -36,7 +39,25 @@ export default function Country () {
 
         getCountry();
     }, [id])
-  return (
+
+    useEffect(() => {
+        if (!country?.name) return;
+
+        const fetchWeather = async () => {
+            try {
+                const data = await getWeather(country.name);
+                setWeather(data);
+                setWeatherError("");
+            } catch (err) {
+                setWeatherError("Could not load weather.");
+                setWeather(null);
+            }
+        };
+
+        fetchWeather();
+    }, [country.name]);
+
+    return (
         <div className="flex flex-col gap-6 pt-8">
             {success ? <p className="bg-green-500 text-white p-4 rounded-xl">
                 {success}
@@ -55,6 +76,22 @@ export default function Country () {
             <p>
                 {country.description}
             </p>
+
+            {weatherError && <p className="text-red-500">{weatherError}</p>}
+
+            {weather ? (
+                <div className="mt-4 p-4 bg-slate-50 rounded-lg border">
+                    <h2 className="text-xl font-semibold">Weather in {country.name}</h2>
+                    <p>Condition: {weather.current.condition.text}</p>
+                    <p>Temp: {weather.current.temp_c}°C</p>
+                    <p>Feels like: {weather.current.feelslike_c}°C</p>
+                    <p>Humidity: {weather.current.humidity}%</p>
+                    <p>Wind: {weather.current.wind_kph} kph</p>
+                </div>
+            ) : (
+                !weatherError && <p className="text-slate-500">Loading weather...</p>
+            )}
+
         </div>
     );
 }

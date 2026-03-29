@@ -49,8 +49,8 @@ export default function AddCountry () {
     }
 
  return (
-        <div className="flex flex-col gap-4 pt-8">
-          <h2 className="text-xl text-white">
+        <div className="flex flex-col gap-4 pt-8 bg-slate-50 p-2 mt-2 rounded-xl">
+          <h2 className="text-xl">
             Add New Country
           </h2>
           {success ? 
@@ -63,10 +63,10 @@ export default function AddCountry () {
               {error}
             </p> : null 
         }
-          <input name="name" value={formData.name}  placeholder="Name" onChange={handleFormChange} className="p-2 border-2 broder-gray-200 rounded-xl text-white" />
-          <input name="description" value={formData.description}placeholder="Description"  onChange={handleFormChange}  className="p-2 border-2 broder-gray-200 rounded-xl text-white" />
-          <input name="imgUrl" value={formData.imgUrl} onChange={handleFormChange} placeholder="ImgUrl" className="p-2 border-2 broder-gray-200 rounded-xl text-white" />
-          <button onClick={submitCountry} className="px-4 py-2 bg-blue-500 text-white rounded-xl">
+          <input name="name" value={formData.name}  placeholder="Name" onChange={handleFormChange} className="p-2 border-2 broder-gray-200 rounded-xl" />
+          <input name="description" value={formData.description}placeholder="Description"  onChange={handleFormChange}  className="p-2 border-2 broder-gray-200 rounded-xl" />
+          <input name="imgUrl" value={formData.imgUrl} onChange={handleFormChange} placeholder="ImgUrl" className="p-2 border-2 broder-gray-200 rounded-xl" />
+          <button onClick={submitCountry} className="px-4 py-2 bg-blue-500 rounded-xl">
             Add Country 
           </button>
         </div>

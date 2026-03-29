@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import AddCountry from "./pages/AddCountry";
 import Country from "./pages/Country";
 import UpdateCountry from "./pages/UpdateCountry";
+import Weather from "./pages/Weather";
 
 
 
