@@ -83,7 +83,7 @@ export default function UpdateCountry () {
             <input name="name" value={country.name || ""} onChange={handleFormChange} placeholder="Name" className="p-2 border-2 border-gray-200 rounded-xl" />
             <input name="description" value={country.description || ""} onChange={handleFormChange} placeholder="Description" className="p-2 border-2 border-gray-200 rounded-xl" />
             <input name="imgUrl" value={country.imgUrl || ""} onChange={handleFormChange} placeholder="Image URL" className="p-2 border-2 border-gray-200 rounded-xl" />
-            <button onClick={updateCountry} className="px-4 py-2 bg-emerald-500 text-white rounded-xl">Update Country</button>
+            <button onClick={updateCountry} className="px-4 py-2 bg-emerald-500 text-white rounded-xl transition hover:bg-green-600">Update Country</button>
         </div>
     );
 }
