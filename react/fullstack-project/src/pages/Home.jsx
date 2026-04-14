@@ -47,8 +47,8 @@ export default function Home() {
             </div>
 
             <section>
-                <h2 className="text-2xl font-bold mb-4">Blog</h2>
-                <p className="mb-4">Discover travel tips & country-blog</p>
+                <h2 className="text-2xl font-bold mb-4 mt-4">Blog</h2>
+                <p className="mb-4">Travel Smarter: Country Tips & Advice</p>
                 <div className="space-y-4">
                     <article className="p-4 bg-white rounded-lg border">
                         <h3 className="font-semibold">Italy</h3>

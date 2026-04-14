@@ -67,7 +67,7 @@ export default function UpdateCountry () {
     }, [id]);
 
     return (
-        <div className="flex flex-col gap-4 pt-8 bg-slate-50 p-2 mt-2 rounded-xl">
+        <div className="flex flex-col gap-4 pt-8 bg-slate-50 p-2 mt-6 rounded-xl">
             <h2 className="text-xl">Update {country.name}</h2>
             {success ? 
             <p className="bg-green-500 text-white p-4 rounded-xl">

@@ -49,7 +49,7 @@ export default function AddCountry () {
     }
 
  return (
-        <div className="flex flex-col gap-4 pt-8 bg-slate-50 p-2 mt-2 rounded-xl">
+        <div className="flex flex-col gap-4 pt-8 bg-slate-50 p-2 mt-4 rounded-xl">
           <h2 className="text-xl">
             Add New Country
           </h2>
