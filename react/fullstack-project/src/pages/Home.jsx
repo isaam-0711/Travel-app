@@ -57,7 +57,7 @@ export default function Home() {
                         <h3 className="font-semibold">Italy</h3>
                         <p>Visit Venice: a unique and enchanting destination in Italy, famous for its canals, historic architecture, and romantic atmosphere. Built on a network of islands, the city offers unforgettable experiences like gondola rides along the Grand Canal and visits to landmarks such as St. Mark’s Basilica. Visitors can wander through narrow streets, discover hidden squares, and enjoy authentic Italian cuisine. 
                             With its rich history, artistic heritage, and timeless charm, Venice is a must-visit destination for travelers seeking culture, beauty, and a one-of-a-kind experience.
-                            <a className="text-blue-500 italic"href="https://theitalyblog.com/"> Read more here</a>
+                            <a className="text-blue-500 italic"href="https://theitalyblog.com/" target="_blank" rel="noreferrer"> Read more here</a> 
                         </p>
 
                     </article>
@@ -66,7 +66,7 @@ export default function Home() {
                         <p>Visit Rio de jainero: 
                             Brazil is a vibrant and diverse destination known for its stunning natural beauty, rich culture, and lively atmosphere. From the iconic beaches of Rio de Janeiro to the vast Amazon rainforest, the country offers something for every type of traveler. Visitors can explore colorful cities, experience world-famous festivals like Carnival, and enjoy delicious local cuisine. 
                             With a warm climate, welcoming people, and endless opportunities for adventure, Brazil is a perfect destination for those seeking both relaxation and excitement.
-                             <a className="text-blue-500 italic" href="https://thehelpfulstranger.blog/brazil-travel/"> Read more here</a>
+                             <a className="text-blue-500 italic" href="https://thehelpfulstranger.blog/brazil-travel/" target="_blank" rel="noreferrer"> Read more here</a>
                         </p>
                        
                     </article>
@@ -74,7 +74,7 @@ export default function Home() {
                         <h3 className="font-semibold">Oman</h3>
                         <p>Visit Muscat: 
                             Oman is a peaceful Arabian Peninsula country known for its dramatic desert dunes, rugged mountains, and warm hospitality. Muscat, the capital, sits on the Gulf of Oman and blends modern waterfronts with historic forts, colorful souks, and serene mosques.
-                            <a className="text-blue-500 italic" href="https://www.tuljak.com/blog/destination-profile-oman"> Read more here</a>
+                            <a className="text-blue-500 italic" href="https://www.tuljak.com/blog/destination-profile-oman" target="_blank" rel="noreferrer"> Read more here</a>
                         </p>
                     </article>
                 </div>

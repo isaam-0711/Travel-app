@@ -91,7 +91,7 @@ export default function Country() {
                     <button onClick={markAsVisited} className="bg-green-500 py-2 px-4 text-white rounded-xl transition hover:bg-green-600">Mark as Visited</button>
                 </div>
             </div>
-            <p className="text-base leading-7 text-slate-800 dark:text-slate-200">
+            <p className="justify-text text-center text-md italic text-white">
                 {country.description}
             </p>
 
