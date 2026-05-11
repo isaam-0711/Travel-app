@@ -30,6 +30,23 @@ export default function Country() {
         }
     }
 
+    const markAsVisited = async () => {
+        setSuccess("");
+
+        const res = await fetch("http://localhost:4000/update-country/" + id, {
+            method: "PATCH",
+            body: JSON.stringify({ status: "VISITED" }),
+            headers: { "Content-Type": "application/json" }
+        });
+
+        const response = await res.json();
+
+        if (response.success) {
+            setSuccess(response.success);
+            setCountry({ ...country, status: "VISITED" });
+        }
+    }
+
     useEffect(() => {
         const getCountry = async () => {
             const res = await fetch("http://localhost:4000/get-country/" + id);
@@ -63,17 +80,18 @@ export default function Country() {
                 {success}
             </p> : null
             }
-            <img src={country.imgUrl} className="w-full h-100 object-cover rounded-xl" />
-            <div className="flex justify-between items-center">
-                <h1 className="text-4xl font-semibold">
+            <img src={country.imgUrl} className="w-full h-60 sm:h-80 object-cover rounded-xl" />
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <h1 className="text-3xl sm:text-4xl font-semibold">
                     {country.name}
                 </h1>
-                <div className="flex gap-2">
-                    <button onClick={deleteCountry} className="bg-red-500 py-2 px-4 text-white rounded-xl transition hover:bg-red-600">Delete</button>
-                    <Link to={"/update-country/" + id} className="bg-blue-700 py-2 px-4 text-white rounded-xl transition hover:bg-blue-800">Edit</Link>
+                <div className="flex flex-col gap-3 sm:flex-row sm:gap-2">
+                    <button onClick={deleteCountry} className="w-full sm:w-auto bg-red-500 py-2 px-4 text-white rounded-xl transition hover:bg-red-600">Delete</button>
+                    <Link to={"/update-country/" + id} className="w-full sm:w-auto bg-blue-700 py-2 px-4 text-white rounded-xl transition hover:bg-blue-800">Edit</Link>
+                    <button onClick={markAsVisited} className="bg-green-500 py-2 px-4 text-white rounded-xl transition hover:bg-green-600">Mark as Visited</button>
                 </div>
             </div>
-            <p>
+            <p className="text-base leading-7 text-slate-800 dark:text-slate-200">
                 {country.description}
             </p>
 

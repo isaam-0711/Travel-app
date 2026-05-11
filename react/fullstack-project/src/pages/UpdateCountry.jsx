@@ -28,24 +28,17 @@ export default function UpdateCountry () {
             headers: {
                 "Content-Type": "application/json"
             }
-        })
-
-        .then(async (data) => {
-             const response = await data.json();
-
-             if(response.success) {
-                setSuccess(response.success);
-             } else if (response.error) {
-                setError(response.error);
-
-             }
         });
+
         const response = await res.json();
+
         if (response.success) {
-            navigate("/country/" + id);
+            setSuccess(response.success);
+            setTimeout(() => navigate("/country/" + id), 1200);
+        } else if (response.error) {
+            setError(response.error);
         }
 
-        
     }
 
     const handleFormChange = (e) => {
@@ -67,8 +60,8 @@ export default function UpdateCountry () {
     }, [id]);
 
     return (
-        <div className="flex flex-col gap-4 pt-8 bg-slate-50 p-2 mt-6 rounded-xl">
-            <h2 className="text-xl">Update {country.name}</h2>
+        <div className="max-w-xl mx-auto flex flex-col gap-4 pt-8 bg-slate-50 p-4 sm:p-6 mt-6 rounded-xl shadow-sm">
+            <h2 className="text-2xl font-semibold">Update {country.name}</h2>
             {success ? 
             <p className="bg-green-500 text-white p-4 rounded-xl">
                 {success}
@@ -80,10 +73,10 @@ export default function UpdateCountry () {
                 {error}
             </p>: null    
         }
-            <input name="name" value={country.name || ""} onChange={handleFormChange} placeholder="Name" className="p-2 border-2 border-gray-200 rounded-xl" />
-            <input name="description" value={country.description || ""} onChange={handleFormChange} placeholder="Description" className="p-2 border-2 border-gray-200 rounded-xl" />
-            <input name="imgUrl" value={country.imgUrl || ""} onChange={handleFormChange} placeholder="Image URL" className="p-2 border-2 border-gray-200 rounded-xl" />
-            <button onClick={updateCountry} className="px-4 py-2 bg-emerald-500 text-white rounded-xl transition hover:bg-green-600">Update Country</button>
+            <input name="name" value={country.name || ""} onChange={handleFormChange} placeholder="Name" className="w-full p-3 border-2 border-gray-200 rounded-xl" />
+            <input name="description" value={country.description || ""} onChange={handleFormChange} placeholder="Description" className="w-full p-3 border-2 border-gray-200 rounded-xl" />
+            <input name="imgUrl" value={country.imgUrl || ""} onChange={handleFormChange} placeholder="Image URL" className="w-full p-3 border-2 border-gray-200 rounded-xl" />
+            <button onClick={updateCountry} className="w-full sm:w-auto px-4 py-3 bg-emerald-500 text-white rounded-xl transition hover:bg-green-600">Update Country</button>
         </div>
     );
 }

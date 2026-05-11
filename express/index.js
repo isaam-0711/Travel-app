@@ -11,8 +11,11 @@ app.use(express.json());
 app.use(cors());
 
 app.get('/get-countries', async (req, res) => {
+    const status = req.query.status;
 
-    const countries = await prisma.country.findMany();
+    const countries = await prisma.country.findMany({
+        where: status ? { status: status.toUpperCase() } : {}
+    });
 
     res.send(countries);
 })
@@ -41,6 +44,7 @@ app.post('/add-country', async (req, res) => {
             name: countryData.name,
             description: countryData.description,
             imgUrl: countryData.imgUrl,
+            status: countryData.status ? countryData.status.toUpperCase() : undefined,
         }
     });
 
@@ -52,16 +56,30 @@ app.patch('/update-country/:countryId', async (req, res) => {
     const countryId = parseInt(req.params.countryId);
     const countryData = req.body;
 
-    const updatedCountry = await prisma.country.update({
-        where: { id: countryId },
-        data: {
-            name: countryData.name || undefined,
-            description: countryData.description || undefined,
-            imgUrl: countryData.imgUrl || undefined,
-        }
+    const existingCountry = await prisma.country.findUnique({
+        where: { id: countryId }
     });
 
-    res.send({ success: "Updated " + updatedCountry.name + " successfully!" });
+    const updateData = {
+        name: countryData.name || undefined,
+        description: countryData.description || undefined,
+        imgUrl: countryData.imgUrl || undefined,
+        status: countryData.status ? countryData.status.toUpperCase() : undefined,
+    };
+
+    const updatedCountry = await prisma.country.update({
+        where: { id: countryId },
+        data: updateData
+    });
+
+    const statusChangedToVisited = existingCountry?.status !== 'VISITED'
+        && countryData.status?.toUpperCase() === 'VISITED';
+
+    const successMessage = statusChangedToVisited
+        ? `Marked ${updatedCountry.name} as visited!`
+        : `Country updated successfully`;
+
+    res.send({ success: successMessage, country: updatedCountry });
 });
 
 app.delete('/delete-country/:countryId', async (req, res) => {

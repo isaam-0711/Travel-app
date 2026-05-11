@@ -7,7 +7,7 @@ export default function Home() {
 
     useEffect(() => {
         const getCountries = async () => {
-            await fetch("http://localhost:4000/get-countries")
+            await fetch("http://localhost:4000/get-countries?status=WISHLIST")
                 .then(async (data) => {
                     const response = await data.json();
                     setCountries(response);
@@ -20,7 +20,10 @@ export default function Home() {
 
     return (
         <div className="px-4 py-6 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-            <h1 className="font-bold text-2xl sm:text-3xl mt-2">Countries to visit</h1>
+            <h1 className="font-bold text-2xl sm:text-3xl mt-2">My Wish list</h1>
+            {countries.length === 0 ? (
+                <p>No countries are added to your wishlist.</p>
+            ) : null}
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 md:gap-8 pt-8">
                 {countries.map((country, index) => (
                     <div className="flex flex-col gap-4 bg-white/80 dark:bg-slate-900/80 p-4 rounded-3xl shadow-md backdrop-blur-sm" key={index}>
@@ -49,7 +52,7 @@ export default function Home() {
             <section>
                 <h2 className="text-2xl font-bold mb-4 mt-4">Blog</h2>
                 <p className="mb-4">Travel Smarter: Country Tips & Advice</p>
-                <div className="space-y-4">
+                <div className="space-y-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-6">
                     <article className="p-4 bg-white rounded-lg border">
                         <h3 className="font-semibold">Italy</h3>
                         <p>Visit Venice: a unique and enchanting destination in Italy, famous for its canals, historic architecture, and romantic atmosphere. Built on a network of islands, the city offers unforgettable experiences like gondola rides along the Grand Canal and visits to landmarks such as St. Mark’s Basilica. Visitors can wander through narrow streets, discover hidden squares, and enjoy authentic Italian cuisine. 
