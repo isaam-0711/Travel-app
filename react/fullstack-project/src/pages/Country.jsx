@@ -14,9 +14,16 @@ export default function Country() {
     const [weatherError, setWeatherError] = useState("");
 
     const [success, setSuccess] = useState("");
+    const [deleteConfirm, setDeleteConfirm] = useState(false);
 
     const deleteCountry = async () => {
+        if (!deleteConfirm) {
+            setDeleteConfirm(true);
+            return;
+        }
+
         setSuccess("");
+        setDeleteConfirm(false);
 
         const res = await fetch("http://localhost:4000/delete-country/" + id, {
             method: "DELETE",
@@ -33,7 +40,7 @@ export default function Country() {
     const markAsVisited = async () => {
         setSuccess("");
 
-        const res = await fetch("http://localhost:4000/update-country/" + id, {
+        const res = await fetch("http://localhost:4000/countries/" + id + "/visit", {
             method: "PATCH",
             body: JSON.stringify({ status: "VISITED" }),
             headers: { "Content-Type": "application/json" }
@@ -44,7 +51,9 @@ export default function Country() {
         if (response.success) {
             setSuccess(response.success);
             setCountry({ ...country, status: "VISITED" });
+            
         }
+        
     }
 
     useEffect(() => {
@@ -79,6 +88,11 @@ export default function Country() {
             {success ? <p className="bg-green-500 text-white p-4 rounded-xl">
                 {success}
             </p> : null
+          
+            }
+            {deleteConfirm ? <p className="bg-red-500 text-white p-4 rounded-xl">
+                Are you sure you want to delete this country? Click Delete again to confirm.
+            </p> : null
             }
             <img src={country.imgUrl} className="w-full h-60 sm:h-80 object-cover rounded-xl" />
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -86,7 +100,9 @@ export default function Country() {
                     {country.name}
                 </h1>
                 <div className="flex flex-col gap-3 sm:flex-row sm:gap-2">
-                    <button onClick={deleteCountry} className="w-full sm:w-auto bg-red-500 py-2 px-4 text-white rounded-xl transition hover:bg-red-600">Delete</button>
+                    <button onClick={deleteCountry} className="w-full sm:w-auto bg-red-500 py-2 px-4 text-white rounded-xl transition hover:bg-red-600">
+                        {deleteConfirm ? "Confirm Delete" : "Delete"}
+                    </button>
                     <Link to={"/update-country/" + id} className="w-full sm:w-auto bg-blue-700 py-2 px-4 text-white rounded-xl transition hover:bg-blue-800">Edit</Link>
                     <button onClick={markAsVisited} className="bg-green-500 py-2 px-4 text-white rounded-xl transition hover:bg-green-600">Mark as Visited</button>
                 </div>

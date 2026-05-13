@@ -48,8 +48,8 @@ app.post('/add-country', async (req, res) => {
         }
     });
 
-    res.send({ success: "Added " + country.name + " successfully!" });
-
+    res.send({ success: "Added " + country.name + " successfully!" }); setTimeout(() => { 2000 })
+;
 });
 
 app.patch('/update-country/:countryId', async (req, res) => {
@@ -75,11 +75,33 @@ app.patch('/update-country/:countryId', async (req, res) => {
     const statusChangedToVisited = existingCountry?.status !== 'VISITED'
         && countryData.status?.toUpperCase() === 'VISITED';
 
-    const successMessage = statusChangedToVisited
-        ? `Marked ${updatedCountry.name} as visited!`
-        : `Country updated successfully`;
+    let message;
 
-    res.send({ success: successMessage, country: updatedCountry });
+    if (statusChangedToVisited) {
+        message = "Marked " + updatedCountry.name + " as visited."; 
+    } else { message = ""}
+
+    res.send({ success: "Updated " + updatedCountry.name + " successfully! " + message });
+
+});
+
+app.patch('/countries/:countryId/visit', async (req, res) => {
+    const countryId = parseInt(req.params.countryId);
+
+    const country = await prisma.country.findUnique({
+        where: { id: countryId }
+    });
+
+    if (!country) {
+        return res.status(404).send({ error: "Country not found." });
+    }
+
+    const updatedCountry = await prisma.country.update({
+        where: { id: countryId },
+        data: { status: 'VISITED' }
+    });
+
+    res.send({ success: "Marked " + updatedCountry.name + " as visited." });
 });
 
 app.delete('/delete-country/:countryId', async (req, res) => {
@@ -89,7 +111,7 @@ app.delete('/delete-country/:countryId', async (req, res) => {
         where: { id: countryId }
     })
 
-    res.send({ success: "Deleted " + deletedCountry.name + " from countries list."})
+    res.send({ success: "Deleted " + deletedCountry.name + " from countries list." })
 })
 
 app.listen(port, () => {

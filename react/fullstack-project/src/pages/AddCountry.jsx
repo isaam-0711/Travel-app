@@ -61,7 +61,7 @@ export default function AddCountry() {
       }
       <input name="name" value={formData.name} placeholder="Name" onChange={handleFormChange} className="w-full p-3 border-2 border-gray-200 rounded-xl" />
       <input name="description" value={formData.description} placeholder="Description" onChange={handleFormChange} className="w-full p-3 border-2 border-gray-200 rounded-xl" />
-      <input name="imgUrl" value={formData.imgUrl} onChange={handleFormChange} placeholder="ImgUrl" className="w-full p-3 border-2 border-gray-200 rounded-xl" />
+      <input name="imgUrl" value={formData.imgUrl} onChange={handleFormChange} placeholder="Img Url" className="w-full p-3 border-2 border-gray-200 rounded-xl" />
       <button onClick={submitCountry} className="w-full sm:w-auto px-4 py-3 text-white bg-blue-500 rounded-xl transition hover:bg-blue-800">
         Add Country
       </button>
